@@ -1,0 +1,19 @@
+modules:
+  jira:issuePanel:
+    - key: tangled-hello-world-issue-panel
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: Tangled
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+  function:
+    - key: resolver
+      handler: index.handler
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+app:
+  runtime:
+    name: nodejs22.x
+  id: ari:cloud:ecosystem::app/e8a006fa-11ef-450f-9b6c-0c9b66cbabbb
