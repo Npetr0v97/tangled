@@ -47,8 +47,7 @@ useEffect(() => {
   }, []);
   return (
     <>
-      <Text>Hello world!</Text>
-      <Text>{data ? data : 'Loading...'}</Text>
+      <Text>Number of comments on this issue: {comments?.length}</Text>
     </>
   );
 };
