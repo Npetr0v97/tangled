@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ForgeReconciler, { Text, useProductContext } from '@forge/react';
 import { invoke } from '@forge/bridge';
-import { requestJira } from '@forge/bridge';
+
 
 
 
@@ -10,10 +10,10 @@ const App = () => {
 
   const context = useProductContext();
 
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState("Calculating...");
+  const [issue,setIssue] = useState()
   console.log(`Number of comments on this issue: ${comments?.length}`);
-
-  const [data, setData] = useState(null);
+  console.log(issue)
 
 useEffect(() => {
     
@@ -21,33 +21,30 @@ useEffect(() => {
     if (context) {
       // extract issue ID from the context
       const issueId = context.extension.issue.id;
-  
-      const fetchedComments = await fetchCommentsForIssue(issueId)
-      setComments(fetchedComments)
+      const resFetchedComments = await invoke('fetchComments',{issueId})
+      setComments(resFetchedComments)
     }
   }
-
   fetchComments();
   }, [context]);
 
-  const fetchCommentsForIssue = async () => {
-
-    const issueId = context?.extension.issue.id
-
-    const res = await requestJira(`/rest/api/3/issue/${issueId}/comment`);
-    const data = await res.json();
-    return data.comments;
-  };
-
-
-
   useEffect(() => {
-    invoke('getText', { example: 'my-invoke-variable' }).then(setData);
+    
+    const fetchIssue = async () => {
+      if (context) {
+        // extract issue ID from the context
+        const issueId = context.extension.issue.id;
+        const resFetchedIssue = await invoke('fetchIssue',{issueId})
+        setIssue(resFetchedIssue)
+      }
+    }
+    fetchIssue();
+    }, [context]);
 
-  }, []);
   return (
     <>
-      <Text>Number of comments on this issue: {comments?.length}</Text>
+      <Text>Number of comments on this issue: {typeof comments === "object" ? comments.length : comments}</Text>
+      {issue?.fields?.summary && <Text>Current issue summary: {issue.fields.summary}</Text>}
     </>
   );
 };
