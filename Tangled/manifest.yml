@@ -7,6 +7,14 @@ modules:
       render: native
       title: Tangled
       icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+  jira:projectPage:
+    - key: forge-app-custom-ui-project-page
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+      title: Tangled
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
   function:
     - key: resolver
       handler: index.handler

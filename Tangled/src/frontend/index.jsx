@@ -1,52 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import ForgeReconciler, { Text, useProductContext } from '@forge/react';
-import { invoke } from '@forge/bridge';
+import React from 'react';
+import ForgeReconciler, {useProductContext} from '@forge/react';
+import IssuePanel from "./issuePanel";
+import ProjectPage from "./projectPage"
 
 
 
 
 
 const App = () => {
-
-  const context = useProductContext();
-
-  const [comments, setComments] = useState("Calculating...");
-  const [issue,setIssue] = useState()
-  console.log(`Number of comments on this issue: ${comments?.length}`);
-  console.log(issue)
-
-useEffect(() => {
-    
-  const fetchComments = async () => {
-    if (context) {
-      // extract issue ID from the context
-      const issueId = context.extension.issue.id;
-      const resFetchedComments = await invoke('fetchComments',{issueId})
-      setComments(resFetchedComments)
-    }
-  }
-  fetchComments();
-  }, [context]);
-
-  useEffect(() => {
-    
-    const fetchIssue = async () => {
-      if (context) {
-        // extract issue ID from the context
-        const issueId = context.extension.issue.id;
-        const resFetchedIssue = await invoke('fetchIssue',{issueId})
-        setIssue(resFetchedIssue)
-      }
-    }
-    fetchIssue();
-    }, [context]);
-
-  return (
-    <>
-      <Text>Number of comments on this issue: {typeof comments === "object" ? comments.length : comments}</Text>
-      {issue?.fields?.summary && <Text>Current issue summary: {issue.fields.summary}</Text>}
-    </>
-  );
+ 
+const context = useProductContext();
+const componentType = context?.extension?.type
+console.log(context)
+ if (componentType === "jira:issuePanel") {
+  return <IssuePanel/>
+ } else {
+  return <ProjectPage/>
+ }
+ 
 };
 
 ForgeReconciler.render(
