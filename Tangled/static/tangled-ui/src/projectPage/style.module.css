@@ -1,0 +1,17 @@
+.container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .title {
+    color: #7e5bef; /* Lavender Indigo */
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle {
+    color: #a78bfa; /* Light Purple */
+    font-size: 1.5rem;
+    font-weight: 500;
+  }

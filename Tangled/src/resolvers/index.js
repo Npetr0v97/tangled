@@ -1,6 +1,7 @@
 import Resolver from '@forge/resolver';
 import { commentResolvers } from "./comment/index.js"
-import { issueResolvers } from './issues/index.js';
+import { issueResolvers } from './issue/index.js';
+import { userResolvers } from './user/index.js';
 
 const resolver = new Resolver();
 
@@ -11,6 +12,9 @@ Object.entries(commentResolvers).forEach(([name, handler]) => {
   resolver.define(name, handler);
 });
 Object.entries(issueResolvers).forEach(([name, handler]) => {
+  resolver.define(name, handler);
+});
+Object.entries(userResolvers).forEach(([name, handler]) => {
   resolver.define(name, handler);
 });
 
