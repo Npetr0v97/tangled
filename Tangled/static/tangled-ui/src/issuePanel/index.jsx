@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useProductContext } from '@forge/react';
 import { invoke, view } from '@forge/bridge';
-
-
+import styles from './style.module.css';
 
 const Component = ({currentContext}) => {
   const context = currentContext
@@ -38,7 +37,7 @@ const Component = ({currentContext}) => {
 
   return (
     <>
-      <div>Number of comments on this issue: {typeof comments === "object" ? comments.length : comments}</div>
+      <div className={styles.random_text}>Number of comments on this issue: {typeof comments === "object" ? comments.length : comments}</div>
       {issue?.fields?.summary && <div>Current issue summary: {issue.fields.summary}</div>}
     </>
   );
