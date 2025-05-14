@@ -1,4 +1,11 @@
-.container {
+.main_container {
+  border: 1px solid var(--light-gray);      /* Light gray narrow border */
+  border-radius: 10px;          /* Rounded corners */
+  padding: 12px;     
+  min-height: 80vh;
+}
+
+.header_container {
     padding: 20px;
     text-align: center;
   }
@@ -10,12 +17,23 @@
     margin-bottom: 10px;
   }
 
+  .issue_container{
+    display: flex;
+    flex-direction: column;
+    /* gap: 8px;  */
+    box-sizing: border-box;
+    border: 1px solid var(--tangled-purple);
+    border-radius: 10px;
+    max-height: 100%;
+    padding: 12px; 
+  }
+
   .user_name {
     color: var(--tangled-purple)
   }
   
   .subtitle {
-    color: var(--gray);
+    color: var(--light-gray);
     font-size: 1.5rem;
     font-weight: 500;
   }

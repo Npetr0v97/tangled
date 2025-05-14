@@ -14,7 +14,8 @@
   /* Light theme */
     --atlassian-blue: #0052cc;
     --atlassian-blue-light: #0065ff;
-    --gray: #a4a5a6;
+    --light-gray: #a4a5a6;
+    --dark-gray: #37373A;
     /* white and black can be used mostly for the background */
     --white: #ffffff;
     --black: #000000;

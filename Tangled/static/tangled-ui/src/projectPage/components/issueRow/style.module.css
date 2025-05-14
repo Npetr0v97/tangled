@@ -1,3 +1,32 @@
-.row {
-    
+.url_container {
+    text-decoration: none;
+    color: inherit;   
+    display: flex;
+    align-items: center;
 }
+
+.url_container:hover {
+    text-decoration: none;      
+    color: inherit;             
+}
+
+.issue_key{
+    margin-right: 5px;
+}
+
+.row_item {
+    background-color: #f4f5f7;   
+    border: 1px solid #dfe1e6; 
+
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+  }
+
+  .row_item:not(:first-child) {
+    border-top: none;
+  }
+  
+  .row_item:hover {
+    background-color: #ebecf0;
+  }

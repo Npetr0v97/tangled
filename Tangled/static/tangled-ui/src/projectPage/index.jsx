@@ -9,7 +9,7 @@ const Component = ({currentContext}) => {
 
     const [user, setUser] = useState(null)
     const [userIssues, setUserIssues] = useState(null)
-    // console.log("ISSUES ", userIssues)
+
     useEffect(() => {
       
       const fetchUserAndUserIssues = async () => {
@@ -21,7 +21,7 @@ const Component = ({currentContext}) => {
 
           //the fields that will be required from each issue
           //customfield_10058 = A random text field I use to test fetching fields based on their ID
-          const fieldsArray = ["assignee","reporter","status","customfield_10058"]
+          const fieldsArray = ["assignee","reporter","status","issuetype"]
           const projectKey = context.extension.project.key
           const resFetchedIssues = await invoke('fetchUserIssues',{userId,projectKey,fieldsArray})
           setUserIssues(resFetchedIssues)
@@ -31,14 +31,14 @@ const Component = ({currentContext}) => {
       fetchUserAndUserIssues();
       }, [context]);
     
-      return (<div>
-            <div className={styles.container}>
+      return (<div className={styles.main_container}>
+            <div className={styles.header_container}>
               {user && <h1 className={styles.title}>Greetings, <span className={styles.user_name}>{user?.displayName?.split(" ")[0]}</span></h1>}
               {user && <h2 className={styles.subtitle}>Check out a summary of your work.</h2>}
             </div>
-            <div>
+            <div className={styles.issue_container}>
               {userIssues && userIssues.map((issue, index) => 
-              <IssueRow index={index} issue = {issue}/>)}
+              <IssueRow index={index} issue={issue} siteURL={context.siteUrl} />)}
             </div>
       </div>);
 }
