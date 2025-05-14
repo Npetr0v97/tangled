@@ -1,32 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { invoke } from '@forge/bridge';
 import styles from "./style.module.css"
+import IssueRow from './components/issueRow';
 
 
 const Component = ({currentContext}) => {
     const context = currentContext
 
     const [user, setUser] = useState(null)
+    const [userIssues, setUserIssues] = useState(null)
 
     useEffect(() => {
       
-      const fetchUser = async () => {
+      const fetchUserAndUserIssues = async () => {
         if (context) {
           // extract user ID from the context
           const userId = context.accountId;
           const resFetchedUser = await invoke('fetchUserById',{userId})
           setUser(resFetchedUser)
+
+          //the fields that will be required from each issue
+          //customfield_10058 = A random text field I use to test fetching fields based on their ID
+          const fieldsArray = ["assignee","reporter","status","issuetype"]
+          const projectKey = context.extension.project.key
+          const resFetchedIssues = await invoke('fetchUserIssues',{userId,projectKey,fieldsArray})
+          setUserIssues(resFetchedIssues)
         }
       }
-      fetchUser();
+
+      fetchUserAndUserIssues();
       }, [context]);
     
-      return (
-      <div className={styles.container}>
-        <h1 className={styles.title}>Greetings, {user?.displayName?.split(" ")[0]}</h1>
-        <h2 className={styles.subtitle}>Check out a summary of your work.</h2>
-      </div>
-      );
+      return (<div className={styles.main_container}>
+            <div className={styles.header_container}>
+              {user && <h1 className={styles.title}>Greetings, <span className={styles.user_name}>{user?.displayName?.split(" ")[0]}</span></h1>}
+              {user && <h2 className={styles.subtitle}>Check out a summary of your work.</h2>}
+            </div>
+            <div className={styles.issue_container}>
+              {userIssues && userIssues.map((issue, index) => 
+              <IssueRow index={index} issue={issue} siteURL={context.siteUrl} />)}
+            </div>
+      </div>);
 }
 
 export default Component

@@ -19,7 +19,6 @@ useEffect(()=>{
   fetchContext()
 },[])
 
-console.log(context)
 
 const componentType = context?.extension?.type
 
