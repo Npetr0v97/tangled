@@ -1,0 +1,24 @@
+:root {
+  /* Status Category colors */
+  --status-category-in-progress-bg: #DEEBFF;    /* Light blue background */
+  --status-category-in-progress-text: #09326C;  /* Dark navy blue text */
+
+  --status-category-selected-bg: #F4F5F7;       /* Light gray background */
+  --status-category-selected-text: #172B4D;     /* Dark gray text */
+
+  --status-category-done-bg: #E3FCEF;           /* Light green background */
+  --status-category-done-text: #1F845A;         /* Dark green text */
+  --status-category-done-border: #4BCE97;       /* Greenish border */
+
+
+  /* Light theme */
+    --atlassian-blue: #0052cc;
+    --atlassian-blue-light: #0065ff;
+    --gray: #a4a5a6;
+    /* white and black can be used mostly for the background */
+    --white: #ffffff;
+    --black: #000000;
+    --tangled-purple: #7536a5;
+
+    /* Dark theme */
+  }
